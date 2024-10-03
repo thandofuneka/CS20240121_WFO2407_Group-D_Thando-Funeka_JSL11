@@ -20,6 +20,7 @@ function initializeData() {
 initializeData(); //Fix: Call function
 
 // TASK: Get elements from the DOM
+//Fix: Add elements
 const elements = {
   headerBoardName: document.getElementById('header-board-name'),
   columnDivs: document.querySelectorAll('.column-div'),
@@ -59,7 +60,7 @@ function displayBoards(boards) {
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
-    boardElement.addEventListener('click', () => { //Change onclick to addEventListener
+    boardElement.addEventListener('click', () => { //Fix: Change onclick to addEventListener
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
@@ -73,7 +74,7 @@ function displayBoards(boards) {
 
 const colTitles = {
   todo: "todo",
-  doing: "doing",              //Colomn tiles added
+  doing: "doing",              //Fix: Colomn tiles added
   done: "done"
 }
 
@@ -81,7 +82,7 @@ const colTitles = {
 // TASK: Fix Bugs
 function filterAndDisplayTasksByBoard(boardName) {
   const tasks = getTasks(); // Fetch tasks from a simulated local storage function
-  const filteredTasks = tasks.filter(task => task.board === boardName);
+  const filteredTasks = tasks.filter(task => task.board === boardName);  // Fix: Change = to ===
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
 
@@ -161,9 +162,8 @@ function addTaskToUI(task) {
 function setupEventListeners() {
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  cancelEditBtn.addEventListener('click', () => {
-    // e.stopPropagation(); 
-    toggleModal(false, elements.editTaskModal)});
+  cancelEditBtn.addEventListener('click', () => {           //Fix: change .onclick to addEventListeners
+    toggleModal(false, elements.editTaskModal)});           
 
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
@@ -200,7 +200,7 @@ function setupEventListeners() {
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? 'block' : 'none';  //Fix:   :
+  modal.style.display = show ? 'block' : 'none';  //Fix: Change '=>' to  :
 }
 
 /*************************************************************************************************************************************************
@@ -211,6 +211,7 @@ function addTask(event) {
   event.preventDefault(); 
 
   //Assign user input to the task object
+  //Fix: Added tasks to task object
     const task = {
       "title" : document.getElementById('title-input').value,
       "description" : document.getElementById('desc-input').value,
@@ -228,7 +229,7 @@ function addTask(event) {
     }
 }
 
-
+//Fix: Wrote functions for toggleSidebar and toggleTheme
 function toggleSidebar(show) {
   const sidebar = document.getElementById('side-bar-div');
   if (show){
@@ -251,7 +252,7 @@ function toggleTheme() {
 }
 
 
-
+//Fix: Wrote function for openEditTaskModal and saveTaskChanges
 function openEditTaskModal(task) {
   // Set task details in modal inputs
   document.getElementById('edit-task-title-input').value = task.title;
