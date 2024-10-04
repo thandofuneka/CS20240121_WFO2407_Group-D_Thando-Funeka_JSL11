@@ -264,14 +264,23 @@ function openEditTaskModal(task) {
   const saveTaskChangesBtn = document.getElementById('save-task-changes-btn');
   const deleteTaskBtn = document.getElementById('delete-task-btn');
 
+  //NEW FIX!!!!!!!
+  //remove existing event listeners
+  saveTaskChangesBtn.replaceWith(saveTaskChangesBtn.cloneNode(true));
+  deleteTaskBtn.replaceWith(deleteTaskBtn.cloneNode(true));
+  
+  //Re-select the buttons
+  const newSaveTaskChangesBtn = document.getElementById('save-task-changes-btn');
+  const newDeleteTaskBtn = document.getElementById('delete-task-btn');
+  
   // Call saveTaskChanges upon click of Save Changes button
-  saveTaskChangesBtn.addEventListener('click', () => {
+  newSaveTaskChangesBtn.addEventListener('click', () => {
     saveTaskChanges(task.id);
   });
  
 
   // Delete task using a helper function and close the task modal
-  deleteTaskBtn.addEventListener('click', () => {
+  newDeleteTaskBtn.addEventListener('click', () => {
     deleteTask(task.id);
     toggleModal(false, elements.editTaskModal);
     refreshTasksUI();
